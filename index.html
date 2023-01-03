@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>My Meteo</title>
+   <script src="script.js"></script>
+   <style>
+      .container {
+         width: 80%;
+         margin: 0 auto;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+      } 
+
+      .meteo-container {
+         width: 200px;
+         text-align: center;
+      }
+
+      .meteo-list {
+         width: 100%;
+         flex-wrap: wrap;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+      }
+
+      .list-item {
+         width: 100px;
+         margin: 10px;
+         text-align: center;
+      }
+   </style>
+</head>
+<body>
+   <div class="container">
+      <div class="meteo-container">
+         <h1>My Meteo</h1>
+         <!-- Display the meteo of Paris for today with the city for today + {delay} days -->
+         <p>Meteo of Paris today: <span id="meteo-result"></span></p>
+      </div>
+      <!-- display a list in a loop, for i = 0; i<11; i++, with links for mymeteo.com/{i} -->
+      <div class="meteo-list">
+         <div class="list-item"><a href="/0">0</a></div>
+         <div class="list-item"><a href="/1">1</a></div>
+         <div class="list-item"><a href="/2">2</a></div>
+         <div class="list-item"><a href="/3">3</a></div>
+         <div class="list-item"><a href="/4">4</a></div>
+         <div class="list-item"><a href="/5">5</a></div>
+         <div class="list-item"><a href="/6">6</a></div>
+         <div class="list-item"><a href="/7">7</a></div>
+         <div class="list-item"><a href="/8">8</a></div>
+         <div class="list-item"><a href="/9">9</a></div>
+         <div class="list-item"><a href="/10">10</a></div>
+      </div>
+   </div>
+</body>
+</html>
+
+<script>
+   // get the delay from the url
+   let delay = window.location.href.split("/")[1];
+
+   // call a meteo api to get the meteo of Paris for today with the city for today + {delay} days
+   fetch(`https://meteo-api.com/paris/${delay}`)
+      .then(res => res.json())
+      .then(data => {
+         // display the meteo result in a texte field
+         document.getElementById("meteo-result").innerHTML = data.meteo;
+      });
+</script>
